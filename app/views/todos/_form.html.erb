@@ -28,6 +28,10 @@
   <%= form.submit class: "btn btn-primary" %>
 <% end %>
 <%= form_with(model: todo, local: true) do |form| %>
+<div class="mb-3">
+  <%= form.label :tag, "Tag / Category" %>
+  <%= form.text_field :tag, class: "form-control", placeholder: "e.g. Work, Personal, Urgent" %>
+</div>
   <div class="mb-3">
     <%= form.label :title %>
     <%= form.text_field :title, class: "form-control" %>

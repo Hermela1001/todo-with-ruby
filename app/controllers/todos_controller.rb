@@ -75,6 +75,10 @@ end
 
     # Only allow a list of trusted parameters through.
     def todo_params
+  params.require(:todo).permit(:title, :completed, :due_date, :priority, :tag)
+end
+
+    def todo_params
       params.expect(todo: [ :title, :description, :completed, :due_date ])
     end
 end

@@ -15,6 +15,8 @@
           <th>Actions</th>
           <th>Priority</th>
           <th>Due Date</th>
+          <th>Tag</th>
+
 
         </tr>
       </thead>
@@ -36,6 +38,14 @@
     <span class="text-muted">None</span>
   <% end %>
 </td>
+<td>
+  <% if todo.tag.present? %>
+    <span class="badge bg-info text-dark"><%= todo.tag %></span>
+  <% else %>
+    <span class="text-muted">-</span>
+  <% end %>
+</td>
+
 
             
 
