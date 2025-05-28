@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get "sessions/new"
+  get "sessions/create"
+  get "sessions/destroy"
+  get "users/new"
+  get "users/create"
   resources :todos
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -14,6 +19,11 @@ Rails.application.routes.draw do
   # root "posts#index"
 end
 Rails.application.routes.draw do
+  get "sessions/new"
+  get "sessions/create"
+  get "sessions/destroy"
+  get "users/new"
+  get "users/create"
   resources :todos do
     member do
       patch :toggle_completed
@@ -22,3 +32,9 @@ Rails.application.routes.draw do
 
   root "todos#index"
 end
+get  'signup', to: 'users#new',    as: 'signup'
+post 'signup', to: 'users#create'
+get  'signin', to: 'sessions#new', as: 'signin'
+post 'signin', to: 'sessions#create'
+delete 'signout', to: 'sessions#destroy', as: 'signout'
+
