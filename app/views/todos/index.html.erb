@@ -41,3 +41,20 @@
     <p>No todos found. <%= link_to "Add one now!", new_todo_path %></p>
   <% end %>
 </div>
+<div class="container mt-5">
+  <h1 class="mb-4">My ToDo List</h1>
+
+  <div class="mb-3">
+    <%= link_to "All", todos_path, class: "btn btn-outline-primary #{'active' if @filter.blank?}" %>
+    <%= link_to "Completed", todos_path(filter: 'completed'), class: "btn btn-outline-success #{'active' if @filter == 'completed'}" %>
+    <%= link_to "Incomplete", todos_path(filter: 'incomplete'), class: "btn btn-outline-warning #{'active' if @filter == 'incomplete'}" %>
+  </div>
+
+  <%= link_to "Add New Todo", new_todo_path, class: "btn btn-primary mb-3" %>
+
+  <% if @todos.any? %>
+    <!-- existing table code -->
+  <% else %>
+    <p>No todos found. <%= link_to "Add one now!", new_todo_path %></p>
+  <% end %>
+</div>
