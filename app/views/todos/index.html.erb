@@ -6,13 +6,16 @@
   <% if @todos.any? %>
     <table class="table table-striped">
       <thead class="thead-dark"> 
-      <th>Due Date</th>
+      
 
         <tr>
           <th>Title</th>
           <th>Description</th>
           <th>Completed</th>
           <th>Actions</th>
+          <th>Priority</th>
+          <th>Due Date</th>
+
         </tr>
       </thead>
       <tbody>
@@ -21,6 +24,21 @@
             <td><%= todo.title %></td>
             <td><%= truncate(todo.description, length: 50) %></td>
             <td><%= todo.due_date ? todo.due_date.strftime("%Y-%m-%d") : "-" %></td>
+<td>
+  <% case todo.priority %>
+  <% when "high" %>
+    <span class="badge bg-danger">High</span>
+  <% when "medium" %>
+    <span class="badge bg-warning text-dark">Medium</span>
+  <% when "low" %>
+    <span class="badge bg-success">Low</span>
+  <% else %>
+    <span class="text-muted">None</span>
+  <% end %>
+</td>
+
+            
+
 
             <td>
               <td>
