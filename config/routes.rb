@@ -13,3 +13,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 end
+Rails.application.routes.draw do
+  resources :todos do
+    member do
+      patch :toggle_completed
+    end
+  end
+
+  root "todos#index"
+end

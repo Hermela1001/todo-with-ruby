@@ -68,3 +68,18 @@ class TodosController < ApplicationController
       params.expect(todo: [ :title, :description, :completed, :due_date ])
     end
 end
+# app/controllers/todos_controller.rb
+class TodosController < ApplicationController
+  before_action :set_todo, only: %i[show edit update destroy toggle_completed]
+
+  # existing actions...
+
+  def toggle_completed
+    @todo.update(completed: !@todo.completed)
+    redirect_to todos_path, notice: "Todo status updated."
+  end
+
+  private
+
+  # existing private methods...
+end

@@ -19,12 +19,16 @@
             <td><%= todo.title %></td>
             <td><%= truncate(todo.description, length: 50) %></td>
             <td>
-              <% if todo.completed %>
-                <span class="badge bg-success">Yes</span>
-              <% else %>
-                <span class="badge bg-warning text-dark">No</span>
-              <% end %>
-            </td>
+              <td>
+  <% if todo.completed %>
+    <span class="badge bg-success">Yes</span>
+  <% else %>
+    <span class="badge bg-warning text-dark">No</span>
+  <% end %>
+
+  <%= link_to "Toggle", toggle_completed_todo_path(todo), method: :patch, class: "btn btn-sm btn-outline-primary ms-2" %>
+</td>
+
             <td>
               <%= link_to "Edit", edit_todo_path(todo), class: "btn btn-sm btn-secondary" %>
               <%= link_to "Delete", todo, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
