@@ -9,3 +9,10 @@
 <div>
   <%= link_to "Back to todos", todos_path %>
 </div>
+<div class="container mt-5">
+  <h1><%= action_name.capitalize %> Todo</h1>
+
+  <%= render "form", todo: @todo %>
+
+  <%= link_to "Back to List", todos_path, class: "btn btn-link mt-3" %>
+</div>

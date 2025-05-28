@@ -1,16 +1,39 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <h1 class="mb-4">My ToDo List</h1>
 
-<% content_for :title, "Todos" %>
+  <%= link_to "Add New Todo", new_todo_path, class: "btn btn-primary mb-3" %>
 
-<h1>Todos</h1>
-
-<div id="todos">
-  <% @todos.each do |todo| %>
-    <%= render todo %>
-    <p>
-      <%= link_to "Show this todo", todo %>
-    </p>
+  <% if @todos.any? %>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Completed</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @todos.each do |todo| %>
+          <tr>
+            <td><%= todo.title %></td>
+            <td><%= truncate(todo.description, length: 50) %></td>
+            <td>
+              <% if todo.completed %>
+                <span class="badge bg-success">Yes</span>
+              <% else %>
+                <span class="badge bg-warning text-dark">No</span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "Edit", edit_todo_path(todo), class: "btn btn-sm btn-secondary" %>
+              <%= link_to "Delete", todo, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No todos found. <%= link_to "Add one now!", new_todo_path %></p>
   <% end %>
 </div>
-
-<%= link_to "New todo", new_todo_path %>
