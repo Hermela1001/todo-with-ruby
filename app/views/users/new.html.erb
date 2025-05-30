@@ -1,21 +1,38 @@
-<h1>Sign Up</h1>
+<div class="container mt-5" style="max-width: 500px;">
+  <h2 class="mb-4 text-primary">Sign Up</h2>
 
-<%= form_with model: @user, url: signup_path do |f| %>
-  <div>
-    <%= f.label :username %>
-    <%= f.text_field :username %>
-  </div>
-  <div>
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-  </div>
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <%= f.submit "Sign Up" %>
-<% end %>
+  <%= form_with(model: @user, url: signup_path, local: true) do |form| %>
+    <div class="mb-3">
+      <%= form.label :username, class: "form-label" %>
+      <%= form.text_field :username, class: "form-control", autofocus: true %>
+      <% if @user.errors[:username].any? %>
+        <div class="text-danger mt-1"><%= @user.errors[:username].first %></div>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :email, class: "form-label" %>
+      <%= form.email_field :email, class: "form-control" %>
+      <% if @user.errors[:email].any? %>
+        <div class="text-danger mt-1"><%= @user.errors[:email].first %></div>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :password, class: "form-label" %>
+      <%= form.password_field :password, class: "form-control" %>
+      <% if @user.errors[:password].any? %>
+        <div class="text-danger mt-1"><%= @user.errors[:password].first %></div>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :password_confirmation, "Confirm Password", class: "form-label" %>
+      <%= form.password_field :password_confirmation, class: "form-control" %>
+    </div>
+
+    <%= form.submit "Create Account", class: "btn btn-primary w-100" %>
+  <% end %>
+
+  <p class="mt-3">Already have an account? <%= link_to "Sign In", signin_path %></p>
+</div>

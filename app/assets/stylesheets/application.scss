@@ -1,0 +1,43 @@
+@import "bootstrap";
+
+body {
+  background-color: #2e2e2e;
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.table {
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  color: #ffffff;
+  vertical-align: middle;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #2c2c2c;
+}
+
+.btn-save {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-get {
+  background-color: #f4a300;
+  color: white;
+}
+
+.btn-delete {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-finished {
+  background-color: #2ecc71;
+  color: white;
+}
