@@ -1,14 +1,35 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Root path
+  root "todos#index"
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  # User signup routes
+  get  'signup', to: 'users#new',    as: 'signup'   # form for new user
+  post 'signup', to: 'users#create'               # create new user
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  # User signin routes (sessions)
+  get    'signin',  to: 'sessions#new',    as: 'signin'    # login form
+  post   'signin',  to: 'sessions#create'                 # create session (login)
+  delete 'signout', to: 'sessions#destroy', as: 'signout' # logout
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Todos CRUD routes
+  resources :todos
+
+  # Users routes for user profile and edits (optional but useful)
+  resources :users, only: [:show, :edit, :update, :destroy]
+
+  # Sessions routes (mostly handled above but including for completeness)
+  resources :sessions, only: [:new, :create, :destroy]
+end
+Rails.application.routes.draw do
+  root "todos#index"
+
+  get  "signup", to: "users#new",    as: "signup"
+  post "signup", to: "users#create"
+  get  "signin", to: "sessions#new", as: "signin"
+  post "signin", to: "sessions#create"
+  delete "signout", to: "sessions#destroy", as: "signout"
+
+  resources :users, only: [:new, :create]
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :todos
 end

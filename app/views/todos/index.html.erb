@@ -1,0 +1,92 @@
+<div class="container mt-5">
+  <h1 class="mb-4">My ToDo List</h1>
+
+  <%= link_to "Add New Todo", new_todo_path, class: "btn btn-primary mb-3" %>
+
+  <% if @todos.any? %>
+    <table class="table table-striped">
+      <thead class="thead-dark"> 
+      
+
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Completed</th>
+          <th>Actions</th>
+          <th>Priority</th>
+          <th>Due Date</th>
+          <th>Tag</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <% @todos.each do |todo| %>
+          <tr>
+            <td><%= todo.title %></td>
+            <td><%= truncate(todo.description, length: 50) %></td>
+            <td><%= todo.due_date ? todo.due_date.strftime("%Y-%m-%d") : "-" %></td>
+<td>
+  <% case todo.priority %>
+  <% when "high" %>
+    <span class="badge bg-danger">High</span>
+  <% when "medium" %>
+    <span class="badge bg-warning text-dark">Medium</span>
+  <% when "low" %>
+    <span class="badge bg-success">Low</span>
+  <% else %>
+    <span class="text-muted">None</span>
+  <% end %>
+</td>
+<td>
+  <% if todo.tag.present? %>
+    <span class="badge bg-info text-dark"><%= todo.tag %></span>
+  <% else %>
+    <span class="text-muted">-</span>
+  <% end %>
+</td>
+
+
+            
+
+
+            <td>
+              <td>
+  <% if todo.completed %>
+    <span class="badge bg-success">Yes</span>
+  <% else %>
+    <span class="badge bg-warning text-dark">No</span>
+  <% end %>
+
+  <%= link_to "Toggle", toggle_completed_todo_path(todo), method: :patch, class: "btn btn-sm btn-outline-primary ms-2" %>
+</td>
+
+            <td>
+              <%= link_to "Edit", edit_todo_path(todo), class: "btn btn-sm btn-secondary" %>
+              <%= link_to "Delete", todo, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No todos found. <%= link_to "Add one now!", new_todo_path %></p>
+  <% end %>
+</div>
+<div class="container mt-5">
+  <h1 class="mb-4">My ToDo List</h1>
+
+  <div class="mb-3">
+    <%= link_to "All", todos_path, class: "btn btn-outline-primary #{'active' if @filter.blank?}" %>
+    <%= link_to "Completed", todos_path(filter: 'completed'), class: "btn btn-outline-success #{'active' if @filter == 'completed'}" %>
+    <%= link_to "Incomplete", todos_path(filter: 'incomplete'), class: "btn btn-outline-warning #{'active' if @filter == 'incomplete'}" %>
+  </div>
+
+  <%= link_to "Add New Todo", new_todo_path, class: "btn btn-primary mb-3" %>
+
+  <% if @todos.any? %>
+    <!-- existing table code -->
+  <% else %>
+    <p>No todos found. <%= link_to "Add one now!", new_todo_path %></p>
+  <% end %>
+</div>
